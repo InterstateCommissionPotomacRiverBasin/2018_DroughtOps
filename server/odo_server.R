@@ -29,7 +29,7 @@ odo.df <- reactive({
                           "hours")
   #----------------------------------------------------------------------------
 #  hourly.sub <- hourly.reac() %>% 
-  hourly.sub <- hourly.df %>% 
+  hourly.sub <- hourly.df() %>% 
     dplyr::filter(date_time >= start.date  &
                     date_time <= todays.date())
   #----------------------------------------------------------------------------
@@ -57,7 +57,7 @@ odo.df <- reactive({
   lagk.df <- bind_rows(hourly.sub, pred.df)
   #----------------------------------------------------------------------------
 #  withdrawals.sub <- withdrawals.reac() %>% 
-    withdrawals.sub <- withdrawals.df %>% 
+    withdrawals.sub <- withdrawals.df() %>% 
     # Yesterday or Today??????????????????????????????????????????????????????????????????????
     dplyr::filter(measurement == "daily average withdrawals",
                   day == "yesterday") %>% 
@@ -113,7 +113,8 @@ output$odo <- renderPlot({
                           "por" = "#E69F00",
                           "predicted" = 	"#56B4E9"),
             x.class = "datetime",
-            y.lab = y.units())
+#            y.lab = y.units())
+            y.lab = y_units)
 }) # End output$odo
 
 

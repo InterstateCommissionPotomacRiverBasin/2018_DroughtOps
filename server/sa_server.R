@@ -29,7 +29,7 @@ sa.df <- reactive({
     dplyr::mutate(date_time = as.Date(date_time))
   #----------------------------------------------------------------------------
 #  sub.df <- daily.reac() %>% 
-  sub.df <- daily.df %>% 
+  sub.df <- daily.df() %>% 
     #select(date_time, lfalls, por, monocacy) %>% 
     select(date_time, site, flow) %>% 
     dplyr::filter(date_time >= start.date,
@@ -52,7 +52,7 @@ sa.df <- reactive({
     constant_lagk(mon_jug, todays.date(), lag.days = 1)
   #----------------------------------------------------------------------------
 #  pot_withdrawals.sub <- withdrawals.reac() %>% 
-    pot_withdrawals.sub <- withdrawals.df %>% 
+    pot_withdrawals.sub <- withdrawals.df() %>% 
     dplyr::filter(site == "potomac_total") %>% 
     dplyr::mutate(flow = flow + 100,
                   site = "lfalls_trigger") %>% 
@@ -68,8 +68,8 @@ sa.df <- reactive({
     tidyr::gather(site, flow, lfalls:lfalls_trigger) %>% 
     dplyr::filter(!is.na(flow))
   
-  return(final.df)
-})
+  return(final.df) 
+}) # end sa.df <- reactive({
 #----------------------------------------------------------------------------
 output$sa <- renderPlot({
   validate(
@@ -104,7 +104,8 @@ output$sa <- renderPlot({
                           "mon_jug" = "#9f00e6",
                           "lfalls_trigger" = "#FF0000"),
             x.class = "date",
-            y.lab = y.units())
+#            y.lab = y.units())
+            y.lab = y_units)
 }) # End output$sa
 #------------------------------------------------------------------------------
 source("server/sa/sa_notifications.R", local = TRUE)

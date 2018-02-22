@@ -1,9 +1,13 @@
+# file.path is a base R function that has some advantages over simply using paste.
+# For one thing, file.path is designed to be fast!
+#
 working.data.dir <- reactive({
   file.path("data_ts", input$data.dir)
 })
 #------------------------------------------------------------------------------
 na.replace <- c("", " ", "Eqp", "#N/A", "-999999")
 #------------------------------------------------------------------------------
+# marfc.forecast is pasted onto hourly.df, and hence not used further:
 marfc.forecast <- reactive({
   marfc.df <- file.path(working.data.dir(), "flow_fc/nws/MARFC_BRKM2.csv") %>% 
     data.table::fread(data.table = FALSE,

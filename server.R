@@ -17,6 +17,7 @@ shinyServer(function(input, output, session) {
   source("server/dates_server.R", local = TRUE)
 # This allowed the user to select units of cfs or mgd for graphs:
 #  source("server/flow_units_server.R", local = TRUE)
+  y_units <- "cfs"
   source("server/import_server.R", local = TRUE)
   #----------------------------------------------------------------------------
   # TAB 1

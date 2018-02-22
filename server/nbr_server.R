@@ -16,7 +16,7 @@ nbr.df <- reactive({
   req(!is.null(todays.date()))
   #----------------------------------------------------------------------------
 #  sub.df <- hourly.reac() %>% 
-  sub.df <- hourly.df %>% 
+  sub.df <- hourly.df() %>% 
     dplyr::filter(date_time <= todays.date())
   #----------------------------------------------------------------------------
   req(nrow(sub.df) > 0)
@@ -27,7 +27,7 @@ nbr.df <- reactive({
     dplyr::filter(site == "obs")
 
 #  lfalls.pred <- lowflow.hourly.reac() %>%   
-  lfalls.pred <- lowflow.hourly.df %>% 
+  lfalls.pred <- lowflow.hourly.df() %>% 
     dplyr::filter(site == "lfalls_sim") %>% 
     rolling_min(flow, 240, "sim")
   
@@ -139,7 +139,8 @@ output$nbr <- renderPlot({
                           "lfalls_lffs" = "#56B4E9",
                           "luke" = "#009E73"),
             x.class = "datetime",
-            y.lab = y.units(),
+#            y.lab = y.units(),
+            y.lab = y_units,
             nine_day.df = lfalls.natural.mgd.today()
   )
 }) # End output$nbr

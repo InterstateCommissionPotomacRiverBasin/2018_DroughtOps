@@ -49,7 +49,7 @@ dts.df <- reactive({
   end.date <- end.date()
   #----------------------------------------------------------------------------
 #  final.df <- withdrawals.reac() %>% 
-    final.df <- withdrawals.df %>% 
+    final.df <- withdrawals.df() %>% 
     #    dplyr::select(date_time, luke, lfalls) %>% 
     dplyr::filter(date_time >= start.date - lubridate::days(3),
                     date_time <= end.date + lubridate::days(1)) %>% 
@@ -141,7 +141,8 @@ output$dts <- renderPlot({
                           
                           "potomac_total" = 	"#AC4D60"),
             x.class = "date",
-            y.lab = y.units())
+#            y.lab = y.units())
+            y.lab = y_units)
 }) # End output$dts
 
 
