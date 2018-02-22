@@ -19,7 +19,8 @@ observeEvent(input$clear.dts, {
 })
 #----------------------------------------------------------------------------
 output$day.dd.dts <- renderUI({
-  day.vector <- withdrawals.reac() %>% 
+#  day.vector <- withdrawals.reac() %>% 
+  day.vector <- withdrawals.df %>% 
     dplyr::select(day) %>% 
     dplyr::distinct() %>% 
     dplyr::mutate(day = stringi::stri_trans_general(day, id = "Title")) %>% 
@@ -32,19 +33,23 @@ output$day.dd.dts <- renderUI({
 
 #----------------------------------------------------------------------------
 output$supplier.dd.dts <- renderUI({
-  if (is.null(withdrawals.reac())) return(NULL)
+#  if (is.null(withdrawals.reac())) return(NULL)
+  if (is.null(withdrawals.df())) return(NULL)
   selectInput("supplier.dd.dts", "Supplier:",
-              c("All Suppliers", unique(withdrawals.reac()$supplier)),
+#              c("All Suppliers", unique(withdrawals.reac()$supplier)),
+              c("All Suppliers", unique(withdrawals.df$supplier)),
               width = "250px")
 })
 
 dts.df <- reactive({
-  if (is.null(withdrawals.reac())) return(NULL)
+#  if (is.null(withdrawals.reac())) return(NULL)
+  if (is.null(withdrawals.df())) return(NULL)
   todays.date <- todays.date()
   start.date <- start.date()
   end.date <- end.date()
   #----------------------------------------------------------------------------
-  final.df <- withdrawals.reac() %>% 
+#  final.df <- withdrawals.reac() %>% 
+    final.df <- withdrawals.df %>% 
     #    dplyr::select(date_time, luke, lfalls) %>% 
     dplyr::filter(date_time >= start.date - lubridate::days(3),
                     date_time <= end.date + lubridate::days(1)) %>% 

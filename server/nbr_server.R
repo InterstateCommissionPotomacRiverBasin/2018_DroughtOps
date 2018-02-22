@@ -15,7 +15,8 @@ observeEvent(input$clear.nbr, {
 nbr.df <- reactive({
   req(!is.null(todays.date()))
   #----------------------------------------------------------------------------
-  sub.df <- hourly.reac() %>% 
+#  sub.df <- hourly.reac() %>% 
+  sub.df <- hourly.df %>% 
     dplyr::filter(date_time <= todays.date())
   #----------------------------------------------------------------------------
   req(nrow(sub.df) > 0)
@@ -24,8 +25,9 @@ nbr.df <- reactive({
     dplyr::filter(site == "lfalls") %>% 
     rolling_min(flow, 240, "obs") %>% 
     dplyr::filter(site == "obs")
-  
-  lfalls.pred <- lowflow.hourly.reac() %>% 
+
+#  lfalls.pred <- lowflow.hourly.reac() %>%   
+  lfalls.pred <- lowflow.hourly.df %>% 
     dplyr::filter(site == "lfalls_sim") %>% 
     rolling_min(flow, 240, "sim")
   

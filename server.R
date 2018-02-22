@@ -2,9 +2,9 @@
 # This is the server logic of a Shiny web application. You can run the
 # application by clicking 'Run App' above.
 #
-# Find out more about building applications with Shiny here:
+# 
 #
-#    http://shiny.rstudio.com/
+#    
 #
 # Define server logic required to draw a histogram
 shinyServer(function(input, output, session) {
@@ -15,7 +15,8 @@ shinyServer(function(input, output, session) {
   session$onSessionEnded(stopApp)
   #----------------------------------------------------------------------------
   source("server/dates_server.R", local = TRUE)
-  source("server/flow_units_server.R", local = TRUE)
+# This allowed the user to select units of cfs or mgd for graphs:
+#  source("server/flow_units_server.R", local = TRUE)
   source("server/import_server.R", local = TRUE)
   #----------------------------------------------------------------------------
   # TAB 1

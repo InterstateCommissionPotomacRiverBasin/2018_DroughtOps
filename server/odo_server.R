@@ -15,8 +15,10 @@ observeEvent(input$clear.odo, {
 })
 #----------------------------------------------------------------------------
 odo.df <- reactive({
-  req(!is.null(withdrawals.reac()),
-      !is.null(hourly.reac()),
+#  req(!is.null(withdrawals.reac()),
+  req(!is.null(withdrawals.df()),
+#      !is.null(hourly.reac()),
+      !is.null(hourly.df()),
       !is.null(todays.date()),
       !is.null(start.date()),
       !is.null(end.date()))
@@ -26,7 +28,8 @@ odo.df <- reactive({
                           end.date(),
                           "hours")
   #----------------------------------------------------------------------------
-  hourly.sub <- hourly.reac() %>% 
+#  hourly.sub <- hourly.reac() %>% 
+  hourly.sub <- hourly.df %>% 
     dplyr::filter(date_time >= start.date  &
                     date_time <= todays.date())
   #----------------------------------------------------------------------------
@@ -53,7 +56,8 @@ odo.df <- reactive({
   pred.df <- variable_lagk(conf.3, "predicted", "por_4", klag.df)
   lagk.df <- bind_rows(hourly.sub, pred.df)
   #----------------------------------------------------------------------------
-  withdrawals.sub <- withdrawals.reac() %>% 
+#  withdrawals.sub <- withdrawals.reac() %>% 
+    withdrawals.sub <- withdrawals.df %>% 
     # Yesterday or Today??????????????????????????????????????????????????????????????????????
     dplyr::filter(measurement == "daily average withdrawals",
                   day == "yesterday") %>% 

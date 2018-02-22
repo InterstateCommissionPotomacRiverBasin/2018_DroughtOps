@@ -16,7 +16,8 @@ observeEvent(input$clear.sa, {
 })
 #------------------------------------------------------------------------------
 sa.df <- reactive({
-  req(!is.null(daily.reac()),
+#  req(!is.null(daily.reac()),
+  req(!is.null(daily.df()),
       !is.null(todays.date()),
       !is.null(start.date()),
       !is.null(end.date()))
@@ -27,7 +28,8 @@ sa.df <- reactive({
                           "days") %>% 
     dplyr::mutate(date_time = as.Date(date_time))
   #----------------------------------------------------------------------------
-  sub.df <- daily.reac() %>% 
+#  sub.df <- daily.reac() %>% 
+  sub.df <- daily.df %>% 
     #select(date_time, lfalls, por, monocacy) %>% 
     select(date_time, site, flow) %>% 
     dplyr::filter(date_time >= start.date,
@@ -49,7 +51,8 @@ sa.df <- reactive({
   mon.df <- por.df %>% 
     constant_lagk(mon_jug, todays.date(), lag.days = 1)
   #----------------------------------------------------------------------------
-  pot_withdrawals.sub <- withdrawals.reac() %>% 
+#  pot_withdrawals.sub <- withdrawals.reac() %>% 
+    pot_withdrawals.sub <- withdrawals.df %>% 
     dplyr::filter(site == "potomac_total") %>% 
     dplyr::mutate(flow = flow + 100,
                   site = "lfalls_trigger") %>% 

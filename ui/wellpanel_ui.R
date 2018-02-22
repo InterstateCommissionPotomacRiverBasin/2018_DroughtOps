@@ -30,12 +30,12 @@ wellPanel(
                         NA, min = 0, max = 10 * 9,
                         width = "125px")
     ),
-    column(width = 1,
-           selectInput("flow.units", "Flow Units:",
-                       c("CFS" = "cfs",
-                         "MGD" = "mgd"),
-                       width = "125px")
-    ),
+#    column(width = 1,
+#           selectInput("flow.units", "Flow Units:",
+#                       c("CFS" = "cfs",
+#                         "MGD" = "mgd"),
+#                       width = "125px")
+#    ),
     column(width = 6,
            conditionalPanel("input.tab == 'Situational Awareness'",
                             checkboxGroupInput("gages.sa",  NULL,
