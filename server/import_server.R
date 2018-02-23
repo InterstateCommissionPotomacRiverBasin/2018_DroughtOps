@@ -98,10 +98,10 @@ withdrawals.df <- reactive({
   
   
   pot.total <- with.df %>% 
-    dplyr::filter(location == "Potomac River"#,
-                  #day == "yesterday",
-                  #measurement == "daily average withdrawals"
-    ) %>% 
+#    dplyr::filter(location == "Potomac River") %>% 
+    dplyr::filter(location %in% c("Potomac River",
+                                  "Potomac River at Great Falls",
+                                  "Potomac River at Little Falls")) %>% 
     dplyr::group_by(measurement, date_time, units) %>% 
     dplyr::summarize(value = sum(value)) %>% 
     dplyr::ungroup() %>% 
