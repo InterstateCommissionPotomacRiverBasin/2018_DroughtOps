@@ -54,10 +54,10 @@ lfalls.yesterday.mgd <- reactive({ # this is yesterday's observed flow at Little
 # Report mean daily observed flow at POR yesterday:
 output$sa_notification_1 <- renderText({
   if (is.null(por.yesterday.cfs())) {
-    paste("Yesterday's mean flow at Point of Rocks (observed at USGS station 01638500) ",
+    paste("Yesterday's mean flow at Point of Rocks ",
           "cannot be calculated for the currently selected 'Todays Date'.")
   } else {
-    paste("Yesterday's mean flow at Point of Rocks (observed at USGS station 01638500) = ",
+    paste("Yesterday's mean flow at Point of Rocks = ",
           por.yesterday.cfs(),
           " cfs.")
   }
@@ -66,10 +66,10 @@ output$sa_notification_1 <- renderText({
 # Report mean daily observed flow at lfalls yesterday:
 output$sa_notification_2 <- renderText({
   if (is.null(lfalls.yesterday.mgd())) {
-    paste("Yesterday's mean flow at Little Falls (observed at USGS station 01646500) ",
+    paste("Yesterday's mean flow at Little Falls (observed) ",
           "cannot be calculated for the currently selected 'Todays Date'.")
   } else {
-    paste("Yesterday's mean flow at Little Falls (observed at USGS station 01646500) = ",
+    paste("Yesterday's mean flow at Little Falls (observed) = ",
           lfalls.yesterday.mgd(),
           " MGD.")
   }
@@ -99,7 +99,7 @@ output$sa_notification_4 <- renderText({
           " MGD.")
   }
 })
-#----------------------------------------------------------------------------
+#
 # Next the LFAA's threshold for the Alert Stage: LFAA pp. 11-12 gives the threshold 
 # in terms of "adjusted flow": W > 0.5*Qadj (where Qadj = Qobs + W, 
 # and W is total WMA Potomac withdrawals). Converting to observed flow, the threshold is:
@@ -114,7 +114,7 @@ output$sa_notification_5 <- renderText({
           " MGD.")
   }
 })
-#----------------------------------------------------------------------------
+#
 # Next the LFAA's threshold for the Restriction Stage, 
 # given in the Memorandum of Intent, p. 2, 3., is W + 100 > 0.8*Qadj (in mgd)
 # or Qobs < W/4 + 125 mgd:
@@ -131,3 +131,10 @@ output$sa_notification_6 <- renderText({
   }
 })
 #----------------------------------------------------------------------------
+# Display VA and MD drought status maps
+map_va <- "http://deq1.bse.vt.edu/drought/state/images/maps/imageMapFile152053721827416.png"
+output$sa_graphics_1 <- renderText({c('<img src="',map_va,'">')})
+#
+map_md <- "http://mde.maryland.gov/programs/Water/droughtinformation/Currentconditions/PublishingImages/DroughtGraphsStarting2017Apr30/Drought2018-01-31.png"
+output$sa_graphics_2 <- renderText({c('<img src="',map_md,'">')})
+  

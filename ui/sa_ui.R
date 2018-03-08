@@ -3,7 +3,17 @@ tabPanel("Situational Awareness",
            align = "center",
            plotOutput("sa", height = plot.height, width = plot.width),
            br()
-         ), # End fluidRow
+         ), 
+         fluidRow(
+           column(width = 6,
+                  h2("Potomac Flows, Withdrawals, and Triggers")
+                  ),
+           column(width = 3,
+                  h2("Virginia Drought Status Map")
+                  ),
+           column(width = 3,
+                  h2("Maryland Drought Status Map"))
+         ),
          fluidRow(
 #         column(6, textOutput("sa_notification_1")),
            br(),
@@ -22,7 +32,7 @@ tabPanel("Situational Awareness",
            #            )
            #            ),# End column
 #           hr(),
-           column(width = 12, #offset = 1, align = "left",
+           column(width = 6, #offset = 1, align = "left",
                   h4(textOutput("sa_notification_1")), # POR flow
                   h4(textOutput("sa_notification_2")), # LFalls flow
                   h4(textOutput("sa_notification_3")), # total Pot withdrawals
@@ -32,6 +42,13 @@ tabPanel("Situational Awareness",
 #                  tags$ul(
 #                    tags$li(textOutput("sa_notification_6"))
 #                  )
-           )
-         )
+           ),
+           column(width = 3,
+                  htmlOutput("sa_graphics_1")),
+           column(width = 3, 
+                  tags$img(src = "http://mde.maryland.gov/programs/Water/droughtinformation/Currentconditions/PublishingImages/DroughtGraphsStarting2017Apr30/Drought2018-01-31.png",
+                           width = "300px",
+                           height = "300px")
+                              )
+         ) # End FluidRow
 ) # End tabPanel
