@@ -21,7 +21,7 @@ output$nbr_notification_1 <- renderText({
 #----------------------------------------------------------------------------
 # Next, the trigger for drought ops - as stated in the original Drought Manual
 # (but actually needs to be any time over the next 5 days)
-output$sa_notification_2 <- renderText({
+output$nbr_notification_2 <- renderText({
   if (is.null(tot.withdrawal())) {
     paste("The trigger for drought operations: observed flow at Little Falls",
           "cannot be calculated for the currently selected 'Todays Date'.")
@@ -35,7 +35,7 @@ output$sa_notification_2 <- renderText({
 # Next the LFAA's threshold for the Alert Stage, from LFAA, pp. 11-12,
 # originally expressed in terms of "adjusted flow", ie, observed flow + Pot withdrawals.
 # Here we express it in terms of observed flow:
-output$sa_notification_3 <- renderText({
+output$nbr_notification_3 <- renderText({
   if (is.null(tot.withdrawal())) {
     paste("The trigger for the LFAA Alert Stage: observed flow at Little Falls",
           "cannot be calculated for the currently selected 'Todays Date'.")
@@ -47,7 +47,7 @@ output$sa_notification_3 <- renderText({
 })
 #----------------------------------------------------------------------------
 # Next the LFAA's trigger for the Restriction Stage
-output$sa_notification_4 <- renderText({
+output$nbr_notification_4 <- renderText({
   if (is.null(tot.withdrawal())) {
     paste("The trigger for the LFAA Restriction Stage",
           "cannot be calculated for the currently selected 'Todays Date'.")

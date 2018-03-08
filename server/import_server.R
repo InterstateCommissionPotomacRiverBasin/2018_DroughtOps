@@ -43,7 +43,6 @@ daily.df <- reactive({
     data.table::fread(data.table = FALSE,
                       na.strings = na.replace) %>% 
     dplyr::filter(!is.na(site)) %>% 
-    #   dplyr::mutate(date_time = as.Date(date_time, format = "%m/%d/%Y"))
     #   dplyr::mutate(date_time = as.Date(date_time, format = "%Y-%m-%d"))
     dplyr::mutate(date_time = as.POSIXct(date_time),
                   date_time = lubridate::ymd(date_time))

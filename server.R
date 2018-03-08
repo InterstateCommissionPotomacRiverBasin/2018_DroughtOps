@@ -6,7 +6,7 @@
 #
 #    
 #
-# Define server logic required to draw a histogram
+#
 shinyServer(function(input, output, session) {
   #----------------------------------------------------------------------------
   # Automatically stop session once browser window is closed.
